@@ -16,27 +16,12 @@ Route::group([
 });
 
 
-Route::get('supervisors', function(){
-    return response(Supervisor::all(),200);
-});
+Route::get('supervisors', 'SupervisorController@index');
 
-Route::get('supervisors/{supervisor}', function($supervisorId){
-    return response(Supervisor::find($supervisorId),200);
-});
+Route::get('supervisors/{supervisor}', 'SupervisorController@show');
 
-Route::get('supervisors', function(Request $request){
-    $resp = Supervisor::create($request->all());
-    return $resp;
-});
+Route::post('supervisors', 'SupervisorController@store');
 
-Route::put('supervisors/{supervisor}', function(Request $request, $supervisorId) {
-    $supervisor = Supervisor::findOrFail($supervisorId);
-    $supervisor->update($request->all());
-    return $supervisor;
-});
+Route::put('supervisors/{supervisor}', 'SupervisorController@update');
 
-Route::delete('supervisors/{supervisor}',function($supervisorId) {
-    Supervisor::find($supervisorId)->delete();
- 
-    return 204;
-});
+Route::delete('supervisors/{supervisor}', 'SupervisorController@delete');

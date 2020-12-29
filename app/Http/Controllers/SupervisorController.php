@@ -16,6 +16,17 @@ class SupervisorController extends Controller
     }
 
     public function store(Request $request){
+
+        $this->validate($request,[
+            'name' => 'required',
+            'age' => 'required',
+            'address' => 'required',
+            'description' => 'required',
+            'email' => 'required',
+            'telephone' => 'required',
+            'image' => 'required',
+        ]);
+
         $supervisor = Supervisor::create($request->all());
         return response()->json($supervisor, 201);
     }
